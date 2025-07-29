@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.jdbc.core.JdbcTemplate
 import spock.lang.Specification
 
-import javax.sql.DataSource
+import jakarta.sql.DataSource
 import java.time.Duration
 import java.time.Instant
 

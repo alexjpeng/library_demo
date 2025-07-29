@@ -17,7 +17,7 @@ import org.springframework.jdbc.core.ColumnMapRowMapper
 import org.springframework.jdbc.core.JdbcTemplate
 import spock.lang.Specification
 
-import javax.sql.DataSource
+import jakarta.sql.DataSource
 
 import static io.pillopl.library.lending.librarybranch.model.LibraryBranchFixture.anyBranch
 import static io.pillopl.library.lending.patron.model.PatronEvent.BookPlacedOnHold.bookPlacedOnHoldNow

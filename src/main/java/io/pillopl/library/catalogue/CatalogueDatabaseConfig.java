@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.sql.DataSource;
+import jakarta.sql.DataSource;
 
 @Configuration
 class CatalogueDatabaseConfig {
