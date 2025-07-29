@@ -1,11 +1,15 @@
 package io.pillopl.library.lending.patron.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Value;
 
 import static io.pillopl.library.lending.patron.model.PatronType.Regular;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 class PatronInformation {
 
     @NonNull PatronId patronId;

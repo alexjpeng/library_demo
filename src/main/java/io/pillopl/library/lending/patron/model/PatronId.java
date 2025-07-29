@@ -1,11 +1,15 @@
 package io.pillopl.library.lending.patron.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Value;
 
 import java.util.UUID;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PatronId {
     @NonNull UUID patronId;
 }
