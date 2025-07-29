@@ -11,13 +11,15 @@ import io.pillopl.library.lending.patron.model.PatronEvent.BookReturned;
 import io.pillopl.library.lending.patron.model.PatronId;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Value;
 
 import java.time.Instant;
 
-@Value
+@Data
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @EqualsAndHashCode(of = "bookInformation")
 public class BookOnHold implements Book {

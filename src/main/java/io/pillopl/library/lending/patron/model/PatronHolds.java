@@ -2,12 +2,16 @@ package io.pillopl.library.lending.patron.model;
 
 import io.pillopl.library.lending.book.model.AvailableBook;
 import io.pillopl.library.lending.book.model.BookOnHold;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Value;
 
 import java.util.Set;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 class PatronHolds {
 
     static int MAX_NUMBER_OF_HOLDS = 5;
