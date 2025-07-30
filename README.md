@@ -743,15 +743,16 @@ know or simply create a Pull Request.
 
 ### Requirements
 
-* Java 11
-* Maven
+* **Java 11+** (Java 17+ recommended for enhanced security and Spring Boot 3.x compatibility)
+* Maven 3.6+
 
 ### Quickstart
 
-You can run the library app by simply typing the following:
+#### Development Mode
+You can run the library app in development mode by typing the following:
 
 ```console
-$ mvn spring-boot:run
+$ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ...
 ...
 2019-04-03 15:55:39.162  INFO 18957 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
@@ -759,6 +760,20 @@ $ mvn spring-boot:run
 2019-04-03 15:55:39.428  INFO 18957 --- [           main] io.pillopl.library.LibraryApplication    : Started LibraryApplication in 5.999 seconds (JVM running for 23.018)
 
 ```
+
+The development profile uses an in-memory H2 database and exposes all actuator endpoints for debugging.
+
+#### Production Mode
+For production deployment, set the required environment variables and use the production profile:
+
+```console
+$ export DATABASE_URL=jdbc:postgresql://localhost:5432/library_prod
+$ export DATABASE_USERNAME=library_user
+$ export DATABASE_PASSWORD=your_secure_password
+$ mvn spring-boot:run -Dspring-boot.run.profiles=prod
+```
+
+See [Production Deployment Guide](docs/production-deployment.md) for detailed production setup instructions.
 
 ### Build a Jar package
 
