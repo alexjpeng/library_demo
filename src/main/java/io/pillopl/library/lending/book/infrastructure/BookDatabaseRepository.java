@@ -114,8 +114,7 @@ class BookDatabaseRepository implements BookRepository, FindAvailableBook, FindB
 
     private int insert(BookId bookId, BookType bookType, BookDatabaseEntity.BookState state, UUID availableAt, UUID onHoldAt, UUID onHoldBy, Instant onHoldTill, UUID checkedOutAt, UUID checkedOutBy) {
         return jdbcTemplate.update("INSERT INTO book_database_entity " +
-                        "(id, " +
-                        "book_id, " +
+                        "(book_id, " +
                         "book_type, " +
                         "book_state, " +
                         "available_at_branch," +
@@ -125,7 +124,7 @@ class BookDatabaseRepository implements BookRepository, FindAvailableBook, FindB
                         "checked_out_at_branch, " +
                         "checked_out_by_patron, " +
                         "version) VALUES " +
-                        "(book_database_entity_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)",
+                        "(?, ?, ?, ?, ?, ?, ?, ?, ?, 0)",
                 bookId.getBookId(), bookType.toString(), state.toString(), availableAt, onHoldAt, onHoldBy, onHoldTill, checkedOutAt, checkedOutBy);
     }
 
