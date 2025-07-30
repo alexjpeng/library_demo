@@ -65,7 +65,7 @@ class PatronProfileController {
                 .toStream()
                 .map(hold -> resourceWithLinkToHoldSelf(patronId, hold))
                 .collect(toList());
-        return ResponseEntity.ok(new CollectionModel<>(holds, linkTo(methodOn(PatronProfileController.class).findHolds(patronId)).withSelfRel()));
+        return ResponseEntity.ok(CollectionModel.of(holds).add(linkTo(methodOn(PatronProfileController.class).findHolds(patronId)).withSelfRel()));
 
     }
 
@@ -86,7 +86,7 @@ class PatronProfileController {
                 .toStream()
                 .map(checkout -> resourceWithLinkToCheckoutSelf(patronId, checkout))
                 .collect(toList());
-        return ResponseEntity.ok(new CollectionModel<>(checkouts, linkTo(methodOn(PatronProfileController.class).findHolds(patronId)).withSelfRel()));
+        return ResponseEntity.ok(CollectionModel.of(checkouts).add(linkTo(methodOn(PatronProfileController.class).findHolds(patronId)).withSelfRel()));
     }
 
     @GetMapping("/profiles/{patronId}/checkouts/{bookId}")
@@ -123,18 +123,16 @@ class PatronProfileController {
     }
 
     private EntityModel<Hold> resourceWithLinkToHoldSelf(UUID patronId, io.pillopl.library.lending.patronprofile.model.Hold hold) {
-        return new EntityModel<>(
-                new Hold(hold),
-                linkTo(methodOn(PatronProfileController.class).findHold(patronId, hold.getBook().getBookId()))
+        return EntityModel.of(new Hold(hold))
+                .add(linkTo(methodOn(PatronProfileController.class).findHold(patronId, hold.getBook().getBookId()))
                         .withSelfRel()
                         .andAffordance(afford(methodOn(PatronProfileController.class)
                                 .cancelHold(patronId, hold.getBook().getBookId()))));
     }
 
     private EntityModel<Checkout> resourceWithLinkToCheckoutSelf(UUID patronId, io.pillopl.library.lending.patronprofile.model.Checkout checkout) {
-        return new EntityModel<>(
-                new Checkout(checkout),
-                linkTo(methodOn(PatronProfileController.class).findCheckout(patronId, checkout.getBook().getBookId()))
+        return EntityModel.of(new Checkout(checkout))
+                .add(linkTo(methodOn(PatronProfileController.class).findCheckout(patronId, checkout.getBook().getBookId()))
                         .withSelfRel());
     }
 }
