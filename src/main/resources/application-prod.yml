@@ -1,0 +1,52 @@
+spring:
+  # Production database configuration - use environment variables
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/library_prod}
+    username: ${DATABASE_USERNAME:library_user}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: ${DATABASE_DRIVER:org.postgresql.Driver}
+  
+  # Disable H2 console in production
+  h2:
+    console:
+      enabled: false
+  
+  # Production logging configuration
+  logging:
+    level:
+      root: WARN
+      io.pillopl.library: INFO
+      org.springframework.security: WARN
+      org.springframework.web: WARN
+    pattern:
+      console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+      file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file:
+      name: ${LOG_FILE:/var/log/library/application.log}
+
+# Production server configuration
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-stacktrace: never
+    include-message: never
+  compression:
+    enabled: true
+
+# Secure actuator endpoints for production
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: when-authorized
+  security:
+    enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: ${METRICS_ENABLED:true}
